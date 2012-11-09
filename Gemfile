@@ -9,6 +9,7 @@ gem 'simple_form'
 gem 'activeadmin'
 gem 'pg'
 gem 'texticle'
+gem 'turbo-sprockets-rails3'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
