@@ -1,0 +1,40 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=Edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title= ENV['title']
+    = csrf_meta_tags
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    = stylesheet_link_tag "application", :media => "all"
+    %link{:href => "/favicon.ico", :rel => "shortcut icon"}/
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          = link_to ENV['title'], root_url, class: "brand"
+          .nav-collapse
+            %ul.nav
+              %li{ class: (controller_name != "samples" || "active") }= link_to "Sample", "#"
+            %ul.nav.pull-right
+              - if user_signed_in?
+                %li= link_to current_user.email, "#"
+                %li= link_to "Logout", destroy_user_session_url, method: :delete
+              - else
+                %li= link_to "Sign up", new_user_registration_url
+                %li= link_to "Login", new_user_session_url
+    .container-fluid
+      - flash.each do |name, msg|
+        %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
+          %a.close{"data-dismiss" => "alert"} ×
+          = msg
+      .row-fluid
+        .span12.last
+          = yield
+      %footer
+        %p &copy; 2012 Me
+
+    = javascript_include_tag "application"
