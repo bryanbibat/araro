@@ -9,6 +9,8 @@
       %th Line Designation
       %th Year Approved
       %th Breeding Institution
+      %th Buy Price (per ha)
+      %th Sell Price (per ha)
       %th Actions
     - @varieties.each do |variety|
       %tr
@@ -17,6 +19,8 @@
         %td= variety.line_designation
         %td= variety.year_approved
         %td= variety.breeding_institution.name
+        %td.money-cell= number_to_currency variety.buy_price
+        %td.money-cell= number_to_currency variety.sell_price
         %td
           = link_to "View", variety, class: "btn"
           - if user_signed_in? and current_user.can_plant?

@@ -12,7 +12,11 @@ class VarietiesController < ApplicationController
     if current_user.actions_left < 1
       flash.now[:error] = "You do not have any actions left for the day"
       render :show
+    elsif current_user.cash < current_user.farm_size * @variety.buy_price
+      flash.now[:error] = "You do not have enough money to bbuy this"
+      render :show
     elsif current_user.has_available_land?
+      current_user.cash -= current_user.farm_size * @variety.buy_price
       current_user.plots.create({variety: @variety})
       current_user.actions_left -= 1
       current_user.save
