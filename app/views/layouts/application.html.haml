@@ -18,7 +18,7 @@
           = link_to ENV['title'], root_url, class: "brand"
           .nav-collapse
             %ul.nav
-              %li{ class: (controller_name != "samples" || "active") }= link_to "Sample", "#"
+              %li{ class: (controller_name != "home" || "active") }= link_to "Home", "root_url"
             %ul.nav.pull-right
               - if user_signed_in?
                 %li= link_to current_user.email, "#"
