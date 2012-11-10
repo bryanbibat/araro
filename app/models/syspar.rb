@@ -7,7 +7,9 @@ class Syspar < ActiveRecord::Base
     "tractor rent" => 1000,
     "carabao rent" => 300,
     "typhoon % to hit" => 40,
-    "typhoon % max damage" => 60
+    "typhoon % max damage" => 60,
+    "hand mill cost" => 700,
+    "machine mill percent cut" => 5
   }
 
   def self.value_for(name)

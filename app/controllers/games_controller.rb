@@ -62,7 +62,7 @@ class GamesController < ApplicationController
   end
 
   def typhoon
-    damage = rand((Syspar.value_for("typhoon % max damage")- (plot.variety.flood_rating || 0)).to_f / 100
+    damage = rand(Syspar.value_for("typhoon % max damage")- (plot.variety.flood_rating || 0)).to_f / 100
     plot = current_user.plots[0]
     plot.expected_yield *= damage
     plot.current_event = nil
@@ -87,10 +87,31 @@ class GamesController < ApplicationController
       plot = current_user.plots[0]
       plot.thresher = "machine"
       current_user.actions_left -= 1
+      plot.expected_yield *= (100 - Syspar.value_for("machine mill percent cut")).to_f / 100
       current_user.cash += plot.expected_yield * plot.variety.sell_price
       current_user.save
       current_user.plots[0].save
       redirect_to game_url, notice: "Field harvested and grains machine milled"
+    else
+      flash.now[:error] = "You already harvested this field"
+      render :show
+    end
+  end
+
+  def hand_mill
+    if current_user.actions_left < 1
+      flash.now[:error] = "You do not have any actions left for the day"
+      render :show
+    elsif current_user.plots[0].thresher.nil?
+      # LOL only one plot
+      plot = current_user.plots[0]
+      plot.thresher = "hand"
+      current_user.actions_left -= 1
+      current_user.cash -= Syspar.value_for("hand mill cost") * current_user.farm_size
+      current_user.cash += plot.expected_yield * plot.variety.sell_price
+      current_user.save
+      current_user.plots[0].save
+      redirect_to game_url, notice: "Field harvested and grains hand milled"
     else
       flash.now[:error] = "You already harvested this field"
       render :show

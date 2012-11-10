@@ -26,7 +26,7 @@
 
       %p
         = link_to "Rent Tractor for Plowing", tractor_game_url, method: :post, confirm: "Are you sure you want to rent a tractor?", class: "btn btn-primary"
-        = link_to "Rent Carabao for Plowing", carabao_game_url, method: :post, confirm: "Are you sure you want to rent a tractor?", class: "btn btn-primary"
+        = link_to "Rent Carabao for Plowing", carabao_game_url, method: :post, confirm: "Are you sure you want to rent a carabao?", class: "btn btn-primary"
 
     - elsif plot.days < plot.variety.maturity
       %p 
@@ -47,7 +47,9 @@
     - else
       %p Plot now ready for harvesting and milling.
 
-      %p= link_to "Harvest then Machine Mill", machine_mill_game_url, method: :post, confirm: "Are you sure you want to use a machine mill?", class: "btn btn-primary"
+      %p
+        = link_to "Harvest then Machine Mill", machine_mill_game_url, method: :post, confirm: "Are you sure you want to use a machine mill?", class: "btn btn-primary"
+        = link_to "Harvest then Hand Mill", hand_mill_game_url, method: :post, confirm: "Are you sure you want to hand mill?", class: "btn btn-primary"
 - else
   %p= link_to "Browse seedlings", varieties_url, class: "btn btn-primary"
 
