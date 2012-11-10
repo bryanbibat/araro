@@ -18,6 +18,6 @@
         %td= variety.year_approved
         %td= variety.breeding_institution.name
         %td
-          = link_to "View", variety
+          = link_to "View", variety, class: "btn"
           - if user_signed_in? and current_user.can_plant?
-            = link_to "Plant", plant_variety_url(variety), method: :post, confirm: "Are you sure you want to plant this?"
+            = link_to "Buy Seedlings", plant_variety_url(variety), method: :post, confirm: "Are you sure you want to plant this?", class: "btn"

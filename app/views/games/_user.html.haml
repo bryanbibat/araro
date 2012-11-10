@@ -9,9 +9,31 @@
   = pluralize(user.farm_size, "hectare")
   of farmland.
 
-- unless user.plot.empty?
-  - user.plot.each do |plot|
+%p
+  You can do
+  = pluralize(user.actions_left, "more action")
+  this week.
 
+- unless user.plots.empty?
+  - user.plots.each do |plot|
+    %h3 Plot details
+
+    %p
+      %s Collapsible details here
+
+    - if plot.plow.blank?
+      %p Plot now ready for plowing.
+
+      %p= link_to "Use Tractor for Plowing", tractor_game_url, method: :post, confirm: "Are you sure you want to use a tractor?", class: "btn btn-primary"
+
+    - elsif plot.days < plot.variety.maturity
+      %p 
+        Plot is planted and will mature in
+        = "#{pluralize(plot.variety.maturity - plot.days, "day")} (#{pluralize((plot.variety.maturity - plot.days)/7 + 1, "week")})."
+    - else
+      %p Plot now ready for harvesting and milling.
+
+      %p= link_to "Harvest and Machine Mill", machine_mill_game_url, method: :post, confirm: "Are you sure you want to use a harvest and machine mill?", class: "btn btn-primary"
 
 %p
-  = link_to "proceed to next day...", next_day_game_url, method: :post, confirm: "Are you sure you want to proceed to the next day?"
+  = link_to "proceed to next week...", next_week_game_url, method: :post, confirm: "Are you sure you want to proceed to the next week?", class: "btn"

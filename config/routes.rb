@@ -9,7 +9,10 @@ Bigas::Application.routes.draw do
 
   resource :game, path: "g", only: :show do
     collection do
-      post :next_day
+      post :next_week
+      post :tractor
+      post :machine_mill
+      post :hand_mill
     end
   end
 

@@ -18,4 +18,14 @@ class User < ActiveRecord::Base
   def can_plant?
     has_available_land? and actions_left > 0
   end
+
+  def next_week
+    self.actions_left = 5
+    self.day += 7
+    save
+    plots.each do |plot|
+      plot.days += 7
+      plot.save
+    end
+  end
 end

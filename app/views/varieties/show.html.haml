@@ -18,4 +18,4 @@
   = @variety.breeding_institution.name
 
 - if user_signed_in? and current_user.can_plant?
-  %p= link_to "Plant", plant_variety_url(@variety), method: :post, confirm: "Are you sure you want to plant this?"
+  %p= link_to "Buy Seedlings", plant_variety_url(@variety), method: :post, confirm: "Are you sure you want to plant this?", class: "btn"
