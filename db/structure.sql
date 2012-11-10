@@ -155,7 +155,9 @@ CREATE TABLE plots (
     event_deck text,
     expected_yield numeric,
     current_event character varying(255),
-    current_event_details text
+    current_event_details text,
+    element character varying(255),
+    scared_birds character varying(255)
 );
 
 
@@ -560,3 +562,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121110194047');
 INSERT INTO schema_migrations (version) VALUES ('20121110202811');
 
 INSERT INTO schema_migrations (version) VALUES ('20121110210035');
+
+INSERT INTO schema_migrations (version) VALUES ('20121110220421');
