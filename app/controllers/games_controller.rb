@@ -21,38 +21,60 @@ class GamesController < ApplicationController
   end
 
   def tractor
+    plot = current_user.plots[0]
     if current_user.actions_left < 1
       flash.now[:error] = "You do not have any actions left for the day"
       render :show
-    elsif current_user.plots[0].plow.nil?
+    elsif plot.plow.nil?
       # LOL only one plot
-      current_user.plots[0].plow = "tractor"
-      current_user.plots[0].days = 0
+      plot.plow = "tractor"
+      plot.days = 0
+      plot.expected_yield *= 1.07
       current_user.actions_left -= 1
+      current_user.cash -= Syspar.value_for("tractor rent") * current_user.farm_size
       current_user.save
-      current_user.plots[0].save
-      redirect_to game_url, notice: "Land tractor plowed and seedlings planted"
+      plot.save
+      redirect_to game_url, notice: "Land plowed and seedlings planted. Tractor improved yield by 7%!"
     else
       flash.now[:error] = "You already plowed this field"
       render :show
     end
   end
 
-  def rent_carabao
+  def carabao
+    plot = current_user.plots[0]
     if current_user.actions_left < 1
       flash.now[:error] = "You do not have any actions left for the day"
       render :show
-    elsif current_user.plots[0].plow.nil?
+    elsif plot.plow.nil?
       # LOL only one plot
-      current_user.plots[0].plow = "carabao"
-      current_user.plots[0].days = 0
+      plot.plow = "carabao"
+      plot.days = 0
       current_user.actions_left -= 1
+      current_user.cash -= Syspar.value_for("carabao rent") * current_user.farm_size
       current_user.save
-      current_user.plots[0].save
-      redirect_to game_url, notice: "Land carabao plowed and seedlings planted"
+      plot.save
+      redirect_to game_url, notice: "Land plowed and seedlings planted."
     else
       flash.now[:error] = "You already plowed this field"
       render :show
+    end
+  end
+
+  def typhoon
+    damage = rand(Syspar.value_for("typhoon % max damage")).to_f / 100
+    plot = current_user.plots[0]
+    plot.expected_yield *= damage
+    plot.current_event = nil
+    current_user.actions_left -= 1
+    current_user.save
+    plot.save
+    if damage > 0.4
+      redirect_to game_url, alert: "Your field has sustained severe damage in the typhoon!"
+    elsif damage > 0.1
+      redirect_to game_url, notice: "Your field has sustained considerable damage in the typhoon!"
+    else
+      redirect_to game_url, notice: "Your field has sustained minimal damage in the typhoon! Whew!"
     end
   end
 
@@ -62,9 +84,10 @@ class GamesController < ApplicationController
       render :show
     elsif current_user.plots[0].thresher.nil?
       # LOL only one plot
-      current_user.plots[0].thresher = "machine"
+      plot = current_user.plots[0]
+      plot.thresher = "machine"
       current_user.actions_left -= 1
-      current_user.cash += current_user.plots[0].variety.ave_yield * current_user.farm_size * 6500
+      current_user.cash += plot.expected_yield * plot.variety.sell_price
       current_user.save
       current_user.plots[0].save
       redirect_to game_url, notice: "Field harvested and grains machine milled"

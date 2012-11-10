@@ -28,8 +28,7 @@ class User < ActiveRecord::Base
     self.day += 7
     save
     plots.each do |plot|
-      plot.days += 7
-      plot.save
+      plot.next_week
     end
   end
 

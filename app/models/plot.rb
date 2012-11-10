@@ -40,6 +40,19 @@ class Plot < ActiveRecord::Base
     days_left / 7 + 1
   end
 
+  def next_week
+    self.days += 7
+    self.current_event = nil
+    if possible_event
+      if possible_event == "typhoon"
+        if rand(100) < Syspar.value_for("typhoon % to hit")
+          self.current_event = "typhoon"
+        end
+      end
+    end
+    save
+  end
+
   def possible_event
     deck = JSON.parse(event_deck)
     unless deck[week].blank?

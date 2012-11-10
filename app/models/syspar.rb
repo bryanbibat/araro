@@ -4,6 +4,10 @@ class Syspar < ActiveRecord::Base
   DEFAULTS = {
     "starting cash" => 20000,
     "starting farm size" => 3,
+    "tractor rent" => 1000,
+    "carabao rent" => 300,
+    "typhoon % to hit" => 100,
+    "typhoon % max damage" => 60
   }
 
   def self.value_for(name)

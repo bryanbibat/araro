@@ -12,6 +12,8 @@ Bigas::Application.routes.draw do
       post :reset
       post :next_week
       post :tractor
+      post :carabao
+      post :typhoon
       post :machine_mill
       post :hand_mill
     end
