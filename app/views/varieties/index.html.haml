@@ -1,0 +1,20 @@
+%h1 Listing Varieties
+- if @varieties.empty?
+  %p No rice varieties found
+- else
+  %table.table.table-striped
+    %tr
+      %th Name
+      %th Common Name
+      %th Line Designation
+      %th Year Approved
+      %th Breeding Institution
+      %th Actions
+    - @varieties.each do |variety|
+      %tr
+        %td= link_to variety.name, variety
+        %td= variety.common_name
+        %td= variety.line_designation
+        %td= variety.year_approved
+        %td= variety.breeding_institution.name
+        %td= link_to "View", variety
