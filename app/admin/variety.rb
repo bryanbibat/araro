@@ -17,6 +17,8 @@ ActiveAdmin.register Variety do
       f.input :line_designation
       f.input :year_approved
       f.input :breeding_institution
+      f.input :buy_price, label: "Buy Price (per ha)"
+      f.input :sell_price, label: "Sell Price (per ha)"
     end
 
     f.inputs "Agronomic Characteristics" do
@@ -27,6 +29,10 @@ ActiveAdmin.register Variety do
     end
 
     f.inputs "Disease and Insect Pest Reactions" do
+      f.input :heat_rating, label: "Heat", as: "select", collection: Variety::REACTIONS
+      f.input :salinity_rating, label: "Salinity", as: "select", collection: Variety::REACTIONS
+      f.input :draught_rating, label: "Draught", as: "select", collection: Variety::REACTIONS
+      f.input :flood_rating, label: "Flood", as: "select", collection: Variety::REACTIONS
       f.input :blast_rating, label: "Blast", as: "select", collection: Variety::REACTIONS
       f.input :blb_rating, label: "Bacterial Leaf Blight (BLB)", as: "select", collection: Variety::REACTIONS
       f.input :shb_rating, label: "Sheath Blight (ShB)", as: "select", collection: Variety::REACTIONS

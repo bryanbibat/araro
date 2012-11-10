@@ -30,6 +30,24 @@ class GamesController < ApplicationController
     end
   end
 
+  def rent_carabao
+    if current_user.actions_left < 1
+      flash.now[:error] = "You do not have any actions left for the day"
+      render :show
+    elsif current_user.plots[0].plow.nil?
+      # LOL only one plot
+      current_user.plots[0].plow = "carabao"
+      current_user.plots[0].days = 0
+      current_user.actions_left -= 1
+      current_user.save
+      current_user.plots[0].save
+      redirect_to game_url, notice: "Land carabao plowed and seedlings planted"
+    else
+      flash.now[:error] = "You already plowed this field"
+      render :show
+    end
+  end
+
   def machine_mill
     if current_user.actions_left < 1
       flash.now[:error] = "You do not have any actions left for the day"

@@ -295,7 +295,13 @@ CREATE TABLE varieties (
     acceptability_cooked numeric,
     acceptability_raw numeric,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    buy_price numeric,
+    sell_price numeric,
+    heat_rating integer,
+    salinity_rating integer,
+    draught_rating integer,
+    flood_rating integer
 );
 
 
@@ -542,3 +548,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121110094708');
 INSERT INTO schema_migrations (version) VALUES ('20121110122516');
 
 INSERT INTO schema_migrations (version) VALUES ('20121110153346');
+
+INSERT INTO schema_migrations (version) VALUES ('20121110182639');
