@@ -16,7 +16,8 @@ class Plot < ActiveRecord::Base
       "drought",
       "flood",
       "typhoon",
-      "higher wage"
+      "higher wage",
+      "good insects"
     ]
     weeks = (variety.maturity / 7)
     blank_count = weeks - event_deck.size
