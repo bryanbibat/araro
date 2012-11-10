@@ -184,6 +184,39 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: syspars; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE syspars (
+    id integer NOT NULL,
+    value numeric,
+    name character varying(255),
+    description text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: syspars_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE syspars_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: syspars_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE syspars_id_seq OWNED BY syspars.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -317,6 +350,13 @@ ALTER TABLE ONLY plots ALTER COLUMN id SET DEFAULT nextval('plots_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY syspars ALTER COLUMN id SET DEFAULT nextval('syspars_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -357,6 +397,14 @@ ALTER TABLE ONLY breeding_institutions
 
 ALTER TABLE ONLY plots
     ADD CONSTRAINT plots_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: syspars_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY syspars
+    ADD CONSTRAINT syspars_pkey PRIMARY KEY (id);
 
 
 --
@@ -492,3 +540,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121109170514');
 INSERT INTO schema_migrations (version) VALUES ('20121110094708');
 
 INSERT INTO schema_migrations (version) VALUES ('20121110122516');
+
+INSERT INTO schema_migrations (version) VALUES ('20121110153346');
