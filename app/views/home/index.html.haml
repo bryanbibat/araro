@@ -1,2 +1,26 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
+.row-fluid
+  .main-container.span8
+    %h1 Welcome to Araro!
+    %p
+
+    %p
+      - if user_signed_in?
+        - if current_user.day == 1
+          = link_to "Start Game", game_url, class: "btn btn-primary"
+        - else
+          = link_to "Continue Game", game_url, class: "btn btn-primary"
+      - else
+        = link_to "Sign Me Up!", new_user_registration_url, class: "btn btn-primary"
+        = link_to "Log in", new_user_session_url, class: "btn"
+
+    %p
+      %em Araro
+      is a web app port of Ricegrow.
+  .top-ten.span4
+    %h3 Top players
+    - @top_players.each do |user|
+      .row-fluid
+        .span12.last
+          = gravatar_for user
+          = user.display_name
+          = number_to_currency user.cash

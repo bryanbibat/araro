@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 
   has_many :plots, conditions: { thresher: nil }
 
+  def display_name
+    "Anonymous #{id}"
+  end
+
   def has_available_land?
     plots.empty?
   end
