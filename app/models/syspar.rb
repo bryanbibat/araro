@@ -8,6 +8,15 @@ class Syspar < ActiveRecord::Base
     "carabao rent" => 300,
     "typhoon % to hit" => 40,
     "typhoon % max damage" => 60,
+    "flood % to hit" => 30,
+    "flood % max damage" => 60,
+    "drought % to hit" => 50,
+    "drought % max damage" => 40,
+    "weed % to hit" => 100,
+    "weed % max damage" => 20,
+    "herbicide % max damage" => 5,
+    "herbicide cost" => 500,
+    "hand weed cost" => 1000,
     "hand mill cost" => 700,
     "machine mill percent cut" => 5
   }

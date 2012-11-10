@@ -45,9 +45,21 @@ class Plot < ActiveRecord::Base
     self.days += 7
     self.current_event = nil
     if possible_event
-      if possible_event == "typhoon"
+      if possible_event == "typhoon" and element != "fire"
         if rand(100) < Syspar.value_for("typhoon % to hit")
           self.current_event = "typhoon"
+        end
+      elsif possible_event == "flood" and element != "fire"
+        if rand(100) < Syspar.value_for("flood % to hit")
+          self.current_event = "flood"
+        end
+      elsif possible_event == "drought" and element != "water"
+        if rand(100) < Syspar.value_for("drought % to hit")
+          self.current_event = "drought"
+        end
+      elsif possible_event == "weed"
+        if rand(100) < Syspar.value_for("weed % to hit")
+          self.current_event = "weed"
         end
       end
     end

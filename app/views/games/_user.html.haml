@@ -43,6 +43,25 @@
 
         %p A severe typhoon is expected to arrive this week.
         %p= link_to "Hope it doesn't do too much damage", typhoon_game_url, method: :post, class: "btn btn-primary"
+      - elsif plot.current_event == "flood"
+        %p
+          %strong Warning:
+          Monsoon rains approaching. Risk of flood is high.
+        %p= link_to "Hope it doesn't do too much damage", flood_game_url, method: :post, class: "btn btn-primary"
+      - elsif plot.current_event == "drought"
+        %p
+          %strong Warning:
+          Risk of drought is high.
+        %p= link_to "Hope it doesn't do too much damage", drought_game_url, method: :post, class: "btn btn-primary"
+      - elsif plot.current_event == "weed"
+        %p
+          %strong Warning:
+          Weed have been growing in significant numbers in your field.
+
+        %p
+          = link_to "Use Herbicide", herbicide_game_url, method: :post, class: "btn btn-primary"
+          = link_to "Hand Weed", hand_weed_game_url, method: :post, class: "btn btn-primary"
+
         
     - else
       %p Plot now ready for harvesting and milling.

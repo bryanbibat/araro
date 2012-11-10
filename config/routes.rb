@@ -14,6 +14,10 @@ Bigas::Application.routes.draw do
       post :tractor
       post :carabao
       post :typhoon
+      post :flood
+      post :drought
+      post :herbicide
+      post :hand_weed
       post :machine_mill
       post :hand_mill
     end

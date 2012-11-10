@@ -62,10 +62,11 @@ class GamesController < ApplicationController
   end
 
   def typhoon
-    damage = rand(Syspar.value_for("typhoon % max damage")- (plot.variety.flood_rating || 0)).to_f / 100
     plot = current_user.plots[0]
+    damage = rand(Syspar.value_for("typhoon % max damage")- (plot.variety.flood_rating || 0)).to_f / 100
     plot.expected_yield *= damage
     plot.current_event = nil
+    plot.element = "water"
     current_user.actions_left -= 1
     current_user.save
     plot.save
@@ -75,6 +76,74 @@ class GamesController < ApplicationController
       redirect_to game_url, notice: "Your field has sustained considerable damage in the typhoon!"
     else
       redirect_to game_url, notice: "Your field has sustained minimal damage in the typhoon! Whew!"
+    end
+  end
+
+  def flood
+    plot = current_user.plots[0]
+    damage = rand(Syspar.value_for("flood % max damage")- (plot.variety.flood_rating || 0)).to_f / 100
+    plot.expected_yield *= damage
+    plot.current_event = nil
+    plot.element = "water"
+    current_user.actions_left -= 1
+    current_user.save
+    plot.save
+    if damage > 0.4
+      redirect_to game_url, alert: "Your field has sustained severe damage in the flood!"
+    elsif damage > 0.1
+      redirect_to game_url, notice: "Your field has sustained considerable damage in the flood!"
+    else
+      redirect_to game_url, notice: "Your field has sustained minimal damage in the flood! Whew!"
+    end
+  end
+
+  def drought
+    plot = current_user.plots[0]
+    damage = rand(Syspar.value_for("drought % max damage")- (plot.variety.draught_rating || 0)).to_f / 100
+    plot.expected_yield *= damage
+    plot.current_event = nil
+    plot.element = "fire"
+    current_user.actions_left -= 1
+    current_user.save
+    plot.save
+    if damage > 0.4
+      redirect_to game_url, alert: "Your field has sustained severe damage in the drought!"
+    elsif damage > 0.1
+      redirect_to game_url, notice: "Your field has sustained considerable damage in the drought!"
+    else
+      redirect_to game_url, notice: "Your field has sustained minimal damage in the drought! Whew!"
+    end
+  end
+
+  def herbicide
+    damage = rand(Syspar.value_for("weed % max damage") + Syspar.value_for("herbicide % max damage")).to_f / 100
+    plot = current_user.plots[0]
+    plot.expected_yield *= damage
+    plot.current_event = nil
+    current_user.actions_left -= 1
+    current_user.cash -= Syspar.value_for("herbicide cost") * current_user.farm_size
+    current_user.save
+    plot.save
+    if damage > 0.1
+      redirect_to game_url, notice: "Weeds had considerable effect on your crops."
+    else
+      redirect_to game_url, notice: "Weeds had minimal effect on your crops."
+    end
+  end
+
+  def hand_weed
+    damage = rand(Syspar.value_for("weed % max damage")).to_f / 100
+    plot = current_user.plots[0]
+    plot.expected_yield *= damage
+    plot.current_event = nil
+    current_user.actions_left -= 1
+    current_user.cash -= Syspar.value_for("hand weed cost") * current_user.farm_size
+    current_user.save
+    plot.save
+    if damage > 0.1
+      redirect_to game_url, notice: "Weeds had considerable effect on your crops."
+    else
+      redirect_to game_url, notice: "Weeds hand minimal effect on your crops."
     end
   end
 
