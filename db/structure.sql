@@ -485,6 +485,13 @@ CREATE INDEX index_plots_on_variety_id ON plots USING btree (variety_id);
 
 
 --
+-- Name: index_syspars_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_syspars_on_name ON syspars USING btree (name);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -564,3 +571,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121110202811');
 INSERT INTO schema_migrations (version) VALUES ('20121110210035');
 
 INSERT INTO schema_migrations (version) VALUES ('20121110220421');
+
+INSERT INTO schema_migrations (version) VALUES ('20121110221518');
