@@ -2,7 +2,8 @@ class Syspar < ActiveRecord::Base
   attr_accessible :description, :name, :value
 
   DEFAULTS = {
-    "starting cash" => 20000 
+    "starting cash" => 20000,
+    "starting farm size" => 3,
   }
 
   def self.value_for(name)

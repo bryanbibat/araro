@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   def reset_values
     self.plots = []
     self.cash = Syspar.value_for("starting cash")
-    self.farm_size = 3
+    self.farm_size = Syspar.value_for("starting farm size")
     save
   end
 end
