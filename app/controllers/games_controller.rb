@@ -1,6 +1,9 @@
 class GamesController < ApplicationController
   before_filter :authenticate_user!
   def show
+    if current_user.new_start?
+      current_user.reset_values
+    end
   end
 
   def next_day
@@ -10,6 +13,11 @@ class GamesController < ApplicationController
 
   def next_week
     current_user.next_week
+  end
+
+  def reset
+    current_user.prepare_reset
+    redirect_to game_url, notice: "Game reset"
   end
 
   def tractor

@@ -32,4 +32,21 @@ class User < ActiveRecord::Base
       plot.save
     end
   end
+
+  def new_start?
+    day == 1 and actions_left == 5
+  end
+
+  def prepare_reset
+    self.day = 1
+    self.actions_left = 5
+    save
+  end
+
+  def reset_values
+    self.plots = []
+    self.cash = 20000
+    self.farm_size = 3
+    save
+  end
 end
