@@ -9,5 +9,9 @@
   = pluralize(user.farm_size, "hectare")
   of farmland.
 
+- unless user.plot.empty?
+  - user.plot.each do |plot|
+
+
 %p
   = link_to "proceed to next day...", next_day_game_url, method: :post, confirm: "Are you sure you want to proceed to the next day?"

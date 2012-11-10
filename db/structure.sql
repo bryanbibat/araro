@@ -137,6 +137,44 @@ ALTER SEQUENCE breeding_institutions_id_seq OWNED BY breeding_institutions.id;
 
 
 --
+-- Name: plots; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE plots (
+    id integer NOT NULL,
+    user_id integer,
+    variety_id integer,
+    days integer,
+    plow character varying(255),
+    pesticide character varying(255),
+    fertilizer_rate numeric,
+    weeding_start integer,
+    thresher character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: plots_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE plots_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: plots_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE plots_id_seq OWNED BY plots.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -272,6 +310,13 @@ ALTER TABLE ONLY breeding_institutions ALTER COLUMN id SET DEFAULT nextval('bree
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY plots ALTER COLUMN id SET DEFAULT nextval('plots_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -304,6 +349,14 @@ ALTER TABLE ONLY admin_users
 
 ALTER TABLE ONLY breeding_institutions
     ADD CONSTRAINT breeding_institutions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: plots_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY plots
+    ADD CONSTRAINT plots_pkey PRIMARY KEY (id);
 
 
 --
@@ -355,6 +408,20 @@ CREATE UNIQUE INDEX index_admin_users_on_email ON admin_users USING btree (email
 --
 
 CREATE UNIQUE INDEX index_admin_users_on_reset_password_token ON admin_users USING btree (reset_password_token);
+
+
+--
+-- Name: index_plots_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_plots_on_user_id ON plots USING btree (user_id);
+
+
+--
+-- Name: index_plots_on_variety_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_plots_on_variety_id ON plots USING btree (variety_id);
 
 
 --
@@ -423,3 +490,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121109170444');
 INSERT INTO schema_migrations (version) VALUES ('20121109170514');
 
 INSERT INTO schema_migrations (version) VALUES ('20121110094708');
+
+INSERT INTO schema_migrations (version) VALUES ('20121110122516');
