@@ -162,7 +162,11 @@ CREATE TABLE users (
     current_sign_in_ip character varying(255),
     last_sign_in_ip character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    day integer DEFAULT 1,
+    cash integer DEFAULT 5000.0,
+    farm_size numeric DEFAULT 5,
+    actions_left integer DEFAULT 5
 );
 
 
@@ -417,3 +421,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121109150945');
 INSERT INTO schema_migrations (version) VALUES ('20121109170444');
 
 INSERT INTO schema_migrations (version) VALUES ('20121109170514');
+
+INSERT INTO schema_migrations (version) VALUES ('20121110094708');
