@@ -34,6 +34,8 @@
       %p Plot now ready for harvesting and milling.
 
       %p= link_to "Harvest and Machine Mill", machine_mill_game_url, method: :post, confirm: "Are you sure you want to use a harvest and machine mill?", class: "btn btn-primary"
+- else
+  %p= link_to "Browse seedlings", varieties_url, class: "btn btn-primary"
 
 %p
   = link_to "proceed to next week...", next_week_game_url, method: :post, confirm: "Are you sure you want to proceed to the next week?", class: "btn"
