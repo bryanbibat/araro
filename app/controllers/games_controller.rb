@@ -38,6 +38,7 @@ class GamesController < ApplicationController
       # LOL only one plot
       current_user.plots[0].thresher = "machine"
       current_user.actions_left -= 1
+      current_user.cash += current_user.plots[0].variety.ave_yield * current_user.farm_size * 6500
       current_user.save
       current_user.plots[0].save
       redirect_to game_url, notice: "Field harvested and grains machine milled"
