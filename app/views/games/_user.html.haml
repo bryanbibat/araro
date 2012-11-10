@@ -29,7 +29,9 @@
     - elsif plot.days < plot.variety.maturity
       %p 
         Plot is planted and will mature in
-        = "#{pluralize(plot.variety.maturity - plot.days, "day")} (#{pluralize((plot.variety.maturity - plot.days)/7 + 1, "week")})."
+        = "#{pluralize(plot.days_left, "day")} (#{pluralize(plot.weeks_left, "week")})."
+      %p= "Expected yield is #{pluralize(plot.expected_yield, "ton")}."
+        
       - if plot.possible_event
         %p
           Possible event for this week:

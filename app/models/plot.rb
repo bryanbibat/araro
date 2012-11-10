@@ -3,7 +3,7 @@ class Plot < ActiveRecord::Base
   belongs_to :variety
   attr_accessible :variety
 
-  before_create :shuffle_events
+  before_create :shuffle_events, :set_initial_yield
 
   def shuffle_events
     event_deck = [
@@ -24,8 +24,20 @@ class Plot < ActiveRecord::Base
     self.event_deck = ([""] + event_deck.shuffle).to_json
   end
 
+  def set_initial_yield
+    self.expected_yield = variety.max_yield * user.farm_size
+  end
+
   def week
     days / 7
+  end
+
+  def days_left
+    variety.maturity - days
+  end
+
+  def weeks_left
+    days_left / 7 + 1
   end
 
   def possible_event

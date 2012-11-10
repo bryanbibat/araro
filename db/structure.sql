@@ -152,7 +152,8 @@ CREATE TABLE plots (
     thresher character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    event_deck text
+    event_deck text,
+    expected_yield numeric
 );
 
 
@@ -553,3 +554,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121110153346');
 INSERT INTO schema_migrations (version) VALUES ('20121110182639');
 
 INSERT INTO schema_migrations (version) VALUES ('20121110194047');
+
+INSERT INTO schema_migrations (version) VALUES ('20121110202811');
