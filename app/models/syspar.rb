@@ -6,7 +6,7 @@ class Syspar < ActiveRecord::Base
     "starting farm size" => 3,
     "tractor rent" => 1000,
     "carabao rent" => 300,
-    "typhoon % to hit" => 100,
+    "typhoon % to hit" => 40,
     "typhoon % max damage" => 60
   }
 

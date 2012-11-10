@@ -62,7 +62,7 @@ class GamesController < ApplicationController
   end
 
   def typhoon
-    damage = rand(Syspar.value_for("typhoon % max damage")).to_f / 100
+    damage = rand((Syspar.value_for("typhoon % max damage")- (plot.variety.flood_rating || 0)).to_f / 100
     plot = current_user.plots[0]
     plot.expected_yield *= damage
     plot.current_event = nil
