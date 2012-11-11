@@ -17,8 +17,8 @@ ActiveAdmin.register Variety do
       f.input :line_designation
       f.input :year_approved
       f.input :breeding_institution
-      f.input :buy_price, label: "Buy Price (per ha)"
-      f.input :sell_price, label: "Sell Price (per ha)"
+      f.input :buy_price, label: "Buy Price (per ton)"
+      f.input :sell_price, label: "Sell Price (per ton)"
     end
 
     f.inputs "Agronomic Characteristics" do
