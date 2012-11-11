@@ -16,10 +16,11 @@
 
 - unless user.plots.empty?
   - user.plots.each do |plot|
-    %h3 Plot details
+    %h3 Rice field details
 
     %p
-      %s Collapsible details here
+      %strong Variety:
+      = link_to plot.variety.name, plot.variety
 
     - if plot.plow.blank?
       %p Plot now ready for plowing.
@@ -53,6 +54,11 @@
           %strong Warning:
           Risk of drought is high.
         %p= link_to "Hope it doesn't do too much damage", drought_game_url, method: :post, class: "btn btn-primary"
+      - elsif plot.current_event == "rat"
+        %p
+          %strong Warning:
+          Rats found near your crops.
+        %p= link_to "Do nothing", do_nothing_game_url, method: :post, class: "btn btn-primary"
       - elsif plot.current_event == "weed"
         %p
           %strong Warning:

@@ -26,10 +26,19 @@ class User < ActiveRecord::Base
   def next_week
     self.actions_left = 5
     self.day += 7
+    self.cash -= weekly_worker_pay + weekly_overhead
     save
     plots.each do |plot|
       plot.next_week
     end
+  end
+
+  def weekly_worker_pay
+    farm_size * Syspar.value_for("worker pay")
+  end
+
+  def weekly_overhead
+    farm_size * Syspar.value_for("overhead")
   end
 
   def new_start?

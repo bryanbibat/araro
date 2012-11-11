@@ -57,6 +57,10 @@ class Plot < ActiveRecord::Base
         if rand(100) < Syspar.value_for("drought % to hit")
           self.current_event = "drought"
         end
+      elsif possible_event == "rat" 
+        if rand(100) < Syspar.value_for("rat % to hit")
+          self.current_event = "rat"
+        end
       elsif possible_event == "weed"
         if rand(100) < Syspar.value_for("weed % to hit")
           self.current_event = "weed"

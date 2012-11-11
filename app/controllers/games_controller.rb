@@ -64,7 +64,7 @@ class GamesController < ApplicationController
   def typhoon
     plot = current_user.plots[0]
     damage = rand(Syspar.value_for("typhoon % max damage")- (plot.variety.flood_rating || 0)).to_f / 100
-    plot.expected_yield *= damage
+    plot.expected_yield *= (1 - damage)
     plot.current_event = nil
     plot.element = "water"
     current_user.actions_left -= 1
@@ -82,7 +82,7 @@ class GamesController < ApplicationController
   def flood
     plot = current_user.plots[0]
     damage = rand(Syspar.value_for("flood % max damage")- (plot.variety.flood_rating || 0)).to_f / 100
-    plot.expected_yield *= damage
+    plot.expected_yield *= (1 - damage)
     plot.current_event = nil
     plot.element = "water"
     current_user.actions_left -= 1
@@ -100,7 +100,7 @@ class GamesController < ApplicationController
   def drought
     plot = current_user.plots[0]
     damage = rand(Syspar.value_for("drought % max damage")- (plot.variety.draught_rating || 0)).to_f / 100
-    plot.expected_yield *= damage
+    plot.expected_yield *= (1 - damage)
     plot.current_event = nil
     plot.element = "fire"
     current_user.actions_left -= 1
@@ -118,7 +118,7 @@ class GamesController < ApplicationController
   def herbicide
     damage = rand(Syspar.value_for("weed % max damage") + Syspar.value_for("herbicide % max damage")).to_f / 100
     plot = current_user.plots[0]
-    plot.expected_yield *= damage
+    plot.expected_yield *= (1 - damage)
     plot.current_event = nil
     current_user.actions_left -= 1
     current_user.cash -= Syspar.value_for("herbicide cost") * current_user.farm_size
@@ -134,7 +134,7 @@ class GamesController < ApplicationController
   def hand_weed
     damage = rand(Syspar.value_for("weed % max damage")).to_f / 100
     plot = current_user.plots[0]
-    plot.expected_yield *= damage
+    plot.expected_yield *= (1 - damage)
     plot.current_event = nil
     current_user.actions_left -= 1
     current_user.cash -= Syspar.value_for("hand weed cost") * current_user.farm_size
@@ -145,6 +145,17 @@ class GamesController < ApplicationController
     else
       redirect_to game_url, notice: "Weeds hand minimal effect on your crops."
     end
+  end
+
+  def do_nothing
+    plot = current_user.plots[0]
+    damage = rand(Syspar.value_for("#{plot.current_event} % max damage")).to_f / 100
+    plot.expected_yield *= (1 - damage)
+    plot.current_event = nil
+    current_user.actions_left -= 1
+    current_user.save
+    plot.save
+    redirect_to game_url, notice: "You lost #{damage}% of your crops."
   end
 
   def machine_mill

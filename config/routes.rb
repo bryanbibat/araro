@@ -18,6 +18,7 @@ Bigas::Application.routes.draw do
       post :drought
       post :herbicide
       post :hand_weed
+      post :do_nothing
       post :machine_mill
       post :hand_mill
     end

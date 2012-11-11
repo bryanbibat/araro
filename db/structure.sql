@@ -306,7 +306,7 @@ CREATE TABLE varieties (
     sell_price numeric,
     heat_rating integer,
     salinity_rating integer,
-    draught_rating integer,
+    drought_rating integer,
     flood_rating integer
 );
 
@@ -573,3 +573,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121110210035');
 INSERT INTO schema_migrations (version) VALUES ('20121110220421');
 
 INSERT INTO schema_migrations (version) VALUES ('20121110221518');
+
+INSERT INTO schema_migrations (version) VALUES ('20121111001238');
