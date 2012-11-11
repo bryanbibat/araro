@@ -20,9 +20,10 @@
 
     %p
       %strong Variety:
-      = link_to plot.variety.name, plot.variety
+      = link_to plot.variety.name, plot.variety, target: "_blank"
 
     - if plot.plow.blank?
+      %p= image_tag "empty-ricefield.jpg"
       %p Plot now ready for plowing.
 
       %p
@@ -30,36 +31,49 @@
         = link_to "Rent Carabao for Plowing", carabao_game_url, method: :post, confirm: "Are you sure you want to rent a carabao?", class: "btn btn-primary"
 
     - elsif plot.days < plot.variety.maturity
+      - if plot.days == 0
+        %p= image_tag "planting-rice-paddy.jpg"
+      - else
+        %p= image_tag "rice-field.jpg"
+
       %p 
         Plot is planted and will mature in
         = "#{pluralize(plot.days_left, "day")} (#{pluralize(plot.weeks_left, "week")})."
-      %p= "Expected yield is #{pluralize(plot.expected_yield, "ton")}."
+      %p
+        Expected yield is 
+        = plot.expected_yield
+        tons.
         
-      - if plot.possible_event
-        %p
-          Possible event for this week:
-          = plot.possible_event
+      //- if plot.possible_event
+      //  %p
+      //    Possible event for this week:
+      //    = plot.possible_event
       - if plot.current_event == "typhoon"
+        %p= image_tag "typhoon.gif"
         %h3 Typhoon Warning
 
         %p A severe typhoon is expected to arrive this week.
         %p= link_to "Hope it doesn't do too much damage", typhoon_game_url, method: :post, class: "btn btn-primary"
       - elsif plot.current_event == "flood"
+        %p= image_tag "flooded.jpg"
         %p
           %strong Warning:
           Monsoon rains approaching. Risk of flood is high.
         %p= link_to "Hope it doesn't do too much damage", flood_game_url, method: :post, class: "btn btn-primary"
       - elsif plot.current_event == "drought"
+        %p= image_tag "drought_rice_field.jpg"
         %p
           %strong Warning:
           Risk of drought is high.
         %p= link_to "Hope it doesn't do too much damage", drought_game_url, method: :post, class: "btn btn-primary"
       - elsif plot.current_event == "rat"
+        %p= image_tag "rats.jpg"
         %p
           %strong Warning:
           Rats found near your crops.
         %p= link_to "Do nothing", do_nothing_game_url, method: :post, class: "btn btn-primary"
       - elsif plot.current_event == "weed"
+        %p= image_tag "weed500.jpg"
         %p
           %strong Warning:
           Weed have been growing in significant numbers in your field.
@@ -70,12 +84,15 @@
 
         
     - else
+      %p= image_tag "harvest.jpg"
       %p Plot now ready for harvesting and milling.
 
       %p
         = link_to "Harvest then Machine Mill", machine_mill_game_url, method: :post, confirm: "Are you sure you want to use a machine mill?", class: "btn btn-primary"
         = link_to "Harvest then Hand Mill", hand_mill_game_url, method: :post, confirm: "Are you sure you want to hand mill?", class: "btn btn-primary"
 - else
+  %p= image_tag "empty-ricefield.jpg"
+  %p Your field is now ready for planting.
   %p= link_to "Browse seedlings", varieties_url, class: "btn btn-primary"
 
 - if user.plots.empty? or user.plots[0].current_event.blank?
@@ -83,4 +100,4 @@
     = link_to "proceed to next week...", next_week_game_url, method: :post, confirm: "Are you sure you want to proceed to the next week?", class: "btn"
 
 %p
-  = link_to "RESET GAME", reset_game_url, method: :post, confirm: "Are you sure you want to reset the game?", class: "btn btn-small"
+  = link_to "RESET GAME", reset_game_url, method: :post, confirm: "Are you sure you want to reset the game?", class: "btn btn-small btn-danger"

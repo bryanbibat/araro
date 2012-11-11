@@ -99,7 +99,7 @@ class GamesController < ApplicationController
 
   def drought
     plot = current_user.plots[0]
-    damage = rand(Syspar.value_for("drought % max damage")- (plot.variety.draught_rating || 0)).to_f / 100
+    damage = rand(Syspar.value_for("drought % max damage")- (plot.variety.drought_rating || 0)).to_f / 100
     plot.expected_yield *= (1 - damage)
     plot.current_event = nil
     plot.element = "fire"
