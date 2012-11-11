@@ -31,7 +31,7 @@ ActiveAdmin.register Variety do
     f.inputs "Disease and Insect Pest Reactions" do
       f.input :heat_rating, label: "Heat", as: "select", collection: Variety::REACTIONS
       f.input :salinity_rating, label: "Salinity", as: "select", collection: Variety::REACTIONS
-      f.input :draught_rating, label: "Draught", as: "select", collection: Variety::REACTIONS
+      f.input :drought_rating, label: "Drought", as: "select", collection: Variety::REACTIONS
       f.input :flood_rating, label: "Flood", as: "select", collection: Variety::REACTIONS
       f.input :blast_rating, label: "Blast", as: "select", collection: Variety::REACTIONS
       f.input :blb_rating, label: "Bacterial Leaf Blight (BLB)", as: "select", collection: Variety::REACTIONS
