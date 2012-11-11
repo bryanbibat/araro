@@ -15,8 +15,12 @@
     .navbar.navbar-fixed-top
       .navbar-inner
         .container-fluid
+          %a.btn.btn-navbar{ "data-toggle" => "collapse", "data-target" => ".nav-collapse" }
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
           = link_to ENV['title'], root_url, class: "brand"
-          .nav-collapse
+          .nav-collapse.collapse
             %ul.nav
               %li{ class: (controller_name != "home" || "active") }= link_to "Home", root_url
               - if user_signed_in?
