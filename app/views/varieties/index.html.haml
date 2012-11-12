@@ -6,8 +6,6 @@
     %tr
       %th Name
       %th Common Name
-      %th Line Designation
-      %th Year Approved
       %th Breeding Institution
       %th Maturity (days)
       %th Max Yield (per ha)
@@ -18,8 +16,6 @@
       %tr
         %td= link_to variety.name, variety
         %td= variety.common_name
-        %td= variety.line_designation
-        %td= variety.year_approved
         %td= variety.breeding_institution.name
         %td= variety.maturity
         %td= variety.max_yield
