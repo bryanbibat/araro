@@ -2,7 +2,7 @@ require "bundler/capistrano"
 
 set :deploy_via, :remote_cache
 set :application, "bigas"
-set :repository, "git@bryanbibat.net:bigas.git"
+set :repository, "git://github.com/bryanbibat/araro.git"
 set :deploy_to, "/home/bry/capistrano/bigas/"
 
 set :scm, :git
