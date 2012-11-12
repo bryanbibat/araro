@@ -242,7 +242,7 @@ CREATE TABLE users (
     updated_at timestamp without time zone NOT NULL,
     day integer DEFAULT 1,
     cash integer DEFAULT 5000.0,
-    farm_size numeric DEFAULT 5,
+    farm_size numeric DEFAULT 3,
     actions_left integer DEFAULT 5
 );
 
