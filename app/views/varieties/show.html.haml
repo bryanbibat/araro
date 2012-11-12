@@ -12,10 +12,11 @@
   %strong Year Approved:
   %br
   = @variety.year_approved
-%p
-  %strong Breeding Institution:
-  %br
-  = @variety.breeding_institution.name
+- if variety.breeding_institution
+  %p
+    %strong Breeding Institution:
+    %br
+    = @variety.breeding_institution.name
 %p
   %strong Maturity
   %br

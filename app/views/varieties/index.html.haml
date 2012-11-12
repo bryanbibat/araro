@@ -16,7 +16,9 @@
       %tr
         %td= link_to variety.name, variety
         %td= variety.common_name
-        %td= variety.breeding_institution.name
+        %td
+          - if variety.breeding_institution
+            = variety.breeding_institution.name
         %td= variety.maturity
         %td= variety.max_yield
         %td.money-cell= number_to_currency variety.buy_price
