@@ -10,6 +10,7 @@
       %th Year Approved
       %th Breeding Institution
       %th Maturity (days)
+      %th Max Yield (per ha)
       %th Buy Price (per ha)
       %th Sell Price (per ton)
       %th Actions
@@ -21,9 +22,10 @@
         %td= variety.year_approved
         %td= variety.breeding_institution.name
         %td= variety.maturity
+        %td= variety.max_yield
         %td.money-cell= number_to_currency variety.buy_price
         %td.money-cell= number_to_currency variety.sell_price
         %td
-          = link_to "View", variety, class: "btn"
+          = link_to "View More Info", variety, class: "btn"
           - if user_signed_in? and current_user.can_plant?
             = link_to "Buy Seedlings", plant_variety_url(variety), method: :post, confirm: "Are you sure you want to plant this?", class: "btn"

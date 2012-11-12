@@ -22,6 +22,10 @@
   = @variety.maturity
   days
 %p
+  %strong Max Yield (per ha)
+  %br
+  = @variety.max_yield
+%p
   %strong Buy Price (per ha)
   %br
   = number_to_currency @variety.buy_price
