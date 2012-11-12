@@ -20,9 +20,9 @@
       a rice growing simulation program.
   .top-ten.span4
     %h3 Top players
-    - @top_players.each do |user|
-      .row-fluid
-        .span12.last
-          = gravatar_for user
-          = user.display_name
-          = number_to_currency user.cash
+    %table.table.top-players.table-condensed.table-hover
+      - @top_players.each do |user|
+        %tr
+          %td= gravatar_for user
+          %td= user.display_name
+          %td.money-cell= number_to_currency user.cash
