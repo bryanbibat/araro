@@ -9,6 +9,7 @@
       %th Line Designation
       %th Year Approved
       %th Breeding Institution
+      %th Maturity (days)
       %th Buy Price (per ha)
       %th Sell Price (per ton)
       %th Actions
@@ -19,6 +20,7 @@
         %td= variety.line_designation
         %td= variety.year_approved
         %td= variety.breeding_institution.name
+        %td= variety.maturity
         %td.money-cell= number_to_currency variety.buy_price
         %td.money-cell= number_to_currency variety.sell_price
         %td
