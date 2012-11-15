@@ -20,7 +20,7 @@
 
     %p
       %strong Variety:
-      = link_to plot.variety.name, plot.variety, target: "_blank"
+      = link_to "#{plot.variety.common_name} (#{plot.variety.name})", plot.variety, target: "_blank"
 
     - if plot.plow.blank?
       %p= image_tag "empty-ricefield.jpg"
