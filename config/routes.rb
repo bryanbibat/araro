@@ -16,6 +16,7 @@ Bigas::Application.routes.draw do
       post :typhoon
       post :flood
       post :drought
+      post :raticide
       post :herbicide
       post :hand_weed
       post :do_nothing

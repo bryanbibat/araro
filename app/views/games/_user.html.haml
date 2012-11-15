@@ -71,7 +71,9 @@
         %p
           %strong Warning:
           Rats found near your crops.
-        %p= link_to "Do nothing", do_nothing_game_url, method: :post, class: "btn btn-primary"
+        %p
+          = link_to "Use Raticide", raticide_game_url, method: :post, class: "btn btn-primary"
+          = link_to "Do nothing", do_nothing_game_url, method: :post, class: "btn btn-primary"
       - elsif plot.current_event == "weed"
         %p= image_tag "weed500.jpg"
         %p

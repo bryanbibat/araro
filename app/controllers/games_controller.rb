@@ -73,7 +73,7 @@ class GamesController < ApplicationController
     if damage > 0.4
       redirect_to game_url, alert: "Your field has sustained severe damage in the typhoon!"
     elsif damage > 0.1
-      redirect_to game_url, notice: "Your field has sustained considerable damage in the typhoon!"
+      redirect_to game_url, alert: "Your field has sustained considerable damage in the typhoon!"
     else
       redirect_to game_url, notice: "Your field has sustained minimal damage in the typhoon! Whew!"
     end
@@ -91,7 +91,7 @@ class GamesController < ApplicationController
     if damage > 0.4
       redirect_to game_url, alert: "Your field has sustained severe damage in the flood!"
     elsif damage > 0.1
-      redirect_to game_url, notice: "Your field has sustained considerable damage in the flood!"
+      redirect_to game_url, alert: "Your field has sustained considerable damage in the flood!"
     else
       redirect_to game_url, notice: "Your field has sustained minimal damage in the flood! Whew!"
     end
@@ -109,14 +109,30 @@ class GamesController < ApplicationController
     if damage > 0.4
       redirect_to game_url, alert: "Your field has sustained severe damage in the drought!"
     elsif damage > 0.1
-      redirect_to game_url, notice: "Your field has sustained considerable damage in the drought!"
+      redirect_to game_url, alert: "Your field has sustained considerable damage in the drought!"
     else
       redirect_to game_url, notice: "Your field has sustained minimal damage in the drought! Whew!"
     end
   end
 
+  def raticide
+    damage = rand(Syspar.value_for("rat % max damage")).to_f / 200
+    plot = current_user.plots[0]
+    plot.expected_yield *= (1 - damage)
+    plot.current_event = nil
+    current_user.actions_left -= 1
+    current_user.cash -= Syspar.value_for("raticide cost") * current_user.farm_size
+    current_user.save
+    plot.save
+    if damage > 0.1
+      redirect_to game_url, alert: "Rats had considerable effect on your crops even after using raticide."
+    else
+      redirect_to game_url, notice: "Rats had minimal effect on your crops."
+    end
+  end
+
   def herbicide
-    damage = rand(Syspar.value_for("weed % max damage") + Syspar.value_for("herbicide % max damage")).to_f / 100
+    damage = rand(Syspar.value_for("weed % max damage") + Syspar.value_for("herbicide % max damage")).to_f / 200
     plot = current_user.plots[0]
     plot.expected_yield *= (1 - damage)
     plot.current_event = nil
@@ -125,14 +141,14 @@ class GamesController < ApplicationController
     current_user.save
     plot.save
     if damage > 0.1
-      redirect_to game_url, notice: "Weeds had considerable effect on your crops."
+      redirect_to game_url, alert: "Weeds had considerable effect on your crops even with herbicide."
     else
       redirect_to game_url, notice: "Weeds had minimal effect on your crops."
     end
   end
 
   def hand_weed
-    damage = rand(Syspar.value_for("weed % max damage")).to_f / 100
+    damage = rand(Syspar.value_for("weed % max damage")).to_f / 150
     plot = current_user.plots[0]
     plot.expected_yield *= (1 - damage)
     plot.current_event = nil
@@ -141,7 +157,7 @@ class GamesController < ApplicationController
     current_user.save
     plot.save
     if damage > 0.1
-      redirect_to game_url, notice: "Weeds had considerable effect on your crops."
+      redirect_to game_url, alert: "Weeds had considerable effect on your crops even after hand weeding."
     else
       redirect_to game_url, notice: "Weeds hand minimal effect on your crops."
     end
@@ -155,7 +171,7 @@ class GamesController < ApplicationController
     current_user.actions_left -= 1
     current_user.save
     plot.save
-    redirect_to game_url, notice: "You lost #{damage}% of your crops."
+    redirect_to game_url, notice: "You lost #{damage * 100}% of your crops."
   end
 
   def machine_mill

@@ -18,6 +18,7 @@ class Syspar < ActiveRecord::Base
     "weed % max damage" => 20,
     "rat % to hit" => 30,
     "rat % max damage" => 40,
+    "raticide cost" => 500,
     "herbicide % max damage" => 5,
     "herbicide cost" => 500,
     "hand weed cost" => 1000,
