@@ -65,6 +65,10 @@ class Plot < ActiveRecord::Base
         if rand(100) < Syspar.value_for("weed % to hit")
           self.current_event = "weed"
         end
+      elsif possible_event == "snail"
+        if rand(100) < Syspar.value_for("snail % to hit")
+          self.current_event = "snail"
+        end
       end
     end
     save

@@ -131,6 +131,22 @@ class GamesController < ApplicationController
     end
   end
 
+  def molluscicide
+    damage = rand(Syspar.value_for("snail % max damage")).to_f / 200
+    plot = current_user.plots[0]
+    plot.expected_yield *= (1 - damage)
+    plot.current_event = nil
+    current_user.actions_left -= 1
+    current_user.cash -= Syspar.value_for("molluscicide cost") * current_user.farm_size
+    current_user.save
+    plot.save
+    if damage > 0.1
+      redirect_to game_url, alert: "Snails had considerable effect on your crops even after using molluscicide."
+    else
+      redirect_to game_url, notice: "Snails had minimal effect on your crops."
+    end
+  end
+
   def herbicide
     damage = rand(Syspar.value_for("weed % max damage") + Syspar.value_for("herbicide % max damage")).to_f / 200
     plot = current_user.plots[0]

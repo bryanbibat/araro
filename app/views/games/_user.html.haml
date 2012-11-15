@@ -74,6 +74,14 @@
         %p
           = link_to "Use Raticide", raticide_game_url, method: :post, class: "btn btn-primary"
           = link_to "Do nothing", do_nothing_game_url, method: :post, class: "btn btn-primary"
+      - elsif plot.current_event == "snail"
+        %p= image_tag "snails.jpg"
+        %p
+          %strong Warning:
+          Golden snails found on your crops.
+        %p
+          = link_to "Use Molluscicide", molluscicide_game_url, method: :post, class: "btn btn-primary"
+          = link_to "Do nothing", do_nothing_game_url, method: :post, class: "btn btn-primary"
       - elsif plot.current_event == "weed"
         %p= image_tag "weed500.jpg"
         %p

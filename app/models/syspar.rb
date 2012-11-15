@@ -16,12 +16,15 @@ class Syspar < ActiveRecord::Base
     "drought % max damage" => 40,
     "weed % to hit" => 60,
     "weed % max damage" => 20,
-    "rat % to hit" => 30,
-    "rat % max damage" => 40,
-    "raticide cost" => 500,
     "herbicide % max damage" => 5,
     "herbicide cost" => 500,
     "hand weed cost" => 1000,
+    "rat % to hit" => 20,
+    "rat % max damage" => 30,
+    "raticide cost" => 500,
+    "snail % to hit" => 20,
+    "snail % max damage" => 30,
+    "molluscicide cost" => 500,
     "hand mill cost" => 700,
     "machine mill percent cut" => 5
   }

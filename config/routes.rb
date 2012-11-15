@@ -17,6 +17,7 @@ Bigas::Application.routes.draw do
       post :flood
       post :drought
       post :raticide
+      post :molluscicide
       post :herbicide
       post :hand_weed
       post :do_nothing
