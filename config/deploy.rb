@@ -15,7 +15,7 @@ set :use_sudo, false
 
 depend :remote, :gem, "bundler"
 
-set :rails_env, :production
+set :rails_env, "production"
 
 # for carrierwave
 set :shared_children, shared_children + %w{public/uploads}
