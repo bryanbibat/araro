@@ -3,13 +3,14 @@ require "bundler/capistrano"
 set :deploy_via, :remote_cache
 set :application, "bigas"
 set :repository, "git://github.com/bryanbibat/araro.git"
+set :deploy_to, "/home/deploy/apps/araro/"
 
 set :scm, :git
 
 default_run_options[:pty] = true
 
 server "araro.karaniwan.org", :app, :web, :db, :primary => true
-set :user, "bry"
+set :user, "deploy"
 set :use_sudo, false
 
 depend :remote, :gem, "bundler"
