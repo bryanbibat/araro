@@ -23,4 +23,5 @@ group :development, :test do
   gem 'nokogiri'
   gem 'ruby_parser'
   gem 'capistrano'
+  gem 'capistrano-unicorn'
 end
