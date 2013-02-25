@@ -38,3 +38,5 @@ task :copy_production_database_configuration do
 end
 
 after "deploy:update", "deploy:cleanup", "deploy:migrate"
+
+require "capistrano-unicorn"
